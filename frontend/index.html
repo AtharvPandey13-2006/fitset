@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FitSet - Transform Your Body, Transform Your Life</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-logo">
+        <i class="fas fa-dumbbell"></i>
+        <span>FitSet</span>
+      </div>
+      <ul class="nav-menu">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#workouts">Workouts</a></li>
+        
+        <li><a href="#tracking">Progress</a></li>
+        
+        <li><a href="auth.html" class="nav-cta">Start Free Trial</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="hero-container">
+      <div class="hero-content">
+        <h1>Transform Your Body, Transform Your Life</h1>
+        <p class="hero-subtitle">
+          Join thousands of people who have achieved their fitness goals with our
+          personalized training programs, expert nutrition guidance, and
+          cutting-edge workout routines.
+        </p>
+        <div class="hero-buttons">
+          <a href="auth.html" class="btn btn-primary">Start Your Journey</a>
+          <a href="#workouts" class="btn btn-secondary">View Workouts</a>
+        </div>
+      </div>
+      <div class="hero-image">
+        <div class="hero-graphic">
+          <i class="fas fa-running"></i>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features">
+    <div class="container">
+      <h2>Why Choose FitSet?</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-dumbbell"></i>
+          </div>
+          <h3>Personalized Workouts</h3>
+          <p>Custom workout plans tailored to your fitness level, goals, and available equipment.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-chart-line"></i>
+          </div>
+          <h3>Progress Tracking</h3>
+          <p>Track your fitness journey with detailed analytics and progress photos.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-apple-alt"></i>
+          </div>
+          <h3>Nutrition Plans</h3>
+          <p>Expert-designed meal plans and nutrition guidance to fuel your workouts.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          
+          
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Workouts Section -->
+  <section id="workouts" class="workouts">
+    <div class="container">
+      <h2>Workout Programs</h2>
+      <p class="section-subtitle">
+        Choose from our variety of workout programs designed for all fitness levels
+      </p>
+      <div class="workout-categories">
+        <button class="category-btn active" data-category="all">All Workouts</button>
+        <button class="category-btn" data-category="strength">Strength</button>
+        <button class="category-btn" data-category="cardio">Cardio</button>
+        <button class="category-btn" data-category="yoga">Yoga</button>
+        <button class="category-btn" data-category="hiit">HIIT</button>
+      </div>
+      <div class="workouts-grid">
+        <div class="workout-card" data-category="strength">
+          <div class="workout-image">
+            <i class="fas fa-dumbbell"></i>
+            <div class="workout-difficulty">Beginner</div>
+          </div>
+          <div class="workout-info">
+            <h3>Full Body Strength</h3>
+            <p>Build muscle and strength with this comprehensive full-body workout routine.</p>
+            <div class="workout-meta">
+              <span><i class="fas fa-clock"></i> 45 min</span>
+              <span><i class="fas fa-fire"></i> 300 cal</span>
+            </div>
+            <a href="auth.html" class="btn btn-outline">Start Workout</a>
+          </div>
+        </div>
+
+        <div class="workout-card" data-category="cardio">
+          <div class="workout-image">
+            <i class="fas fa-running"></i>
+            <div class="workout-difficulty">Intermediate</div>
+          </div>
+          <div class="workout-info">
+            <h3>Cardio Blast</h3>
+            <p>High-energy cardio workout to burn calories and improve cardiovascular health.</p>
+            <div class="workout-meta">
+              <span><i class="fas fa-clock"></i> 30 min</span>
+              <span><i class="fas fa-fire"></i> 400 cal</span>
+            </div>
+            <a href="auth.html" class="btn btn-outline">Start Workout</a>
+          </div>
+        </div>
+
+        <div class="workout-card" data-category="yoga">
+          <div class="workout-image">
+            <i class="fas fa-leaf"></i>
+            <div class="workout-difficulty">All Levels</div>
+          </div>
+          <div class="workout-info">
+            <h3>Morning Yoga Flow</h3>
+            <p>Start your day with this energizing yoga sequence for flexibility and mindfulness.</p>
+            <div class="workout-meta">
+              <span><i class="fas fa-clock"></i> 25 min</span>
+              <span><i class="fas fa-fire"></i> 150 cal</span>
+            </div>
+            <a href="auth.html" class="btn btn-outline">Start Workout</a>
+          </div>
+        </div>
+
+        <div class="workout-card" data-category="hiit">
+          <div class="workout-image">
+            <i class="fas fa-bolt"></i>
+            <div class="workout-difficulty">Advanced</div>
+          </div>
+          <div class="workout-info">
+            <h3>HIIT Power</h3>
+            <p>High-intensity interval training for maximum fat burning and fitness gains.</p>
+            <div class="workout-meta">
+              <span><i class="fas fa-clock"></i> 20 min</span>
+              <span><i class="fas fa-fire"></i> 500 cal</span>
+            </div>
+            <a href="auth.html" class="btn btn-outline">Start Workout</a>
+          </div>
+        </div>
+
+        <div class="workout-card" data-category="strength">
+          <div class="workout-image">
+            <i class="fas fa-weight-hanging"></i>
+            <div class="workout-difficulty">Intermediate</div>
+          </div>
+          <div class="workout-info">
+            <h3>Upper Body Focus</h3>
+            <p>Target your chest, shoulders, and arms with this focused upper body routine.</p>
+            <div class="workout-meta">
+              <span><i class="fas fa-clock"></i> 40 min</span>
+              <span><i class="fas fa-fire"></i> 280 cal</span>
+            </div>
+            <a href="auth.html" class="btn btn-outline">Start Workout</a>
+          </div>
+        </div>
+
+        <div class="workout-card" data-category="cardio">
+          <div class="workout-image">
+            <i class="fas fa-bicycle"></i>
+            <div class="workout-difficulty">Beginner</div>
+          </div>
+          <div class="workout-info">
+            <h3>Cycling Cardio</h3>
+            <p>Low-impact cardio workout perfect for beginners and recovery days.</p>
+            <div class="workout-meta">
+              <span><i class="fas fa-clock"></i> 35 min</span>
+              <span><i class="fas fa-fire"></i> 250 cal</span>
+            </div>
+            <a href="auth.html" class="btn btn-outline">Start Workout</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+  <!-- Progress Tracking Section -->
+  <section id="tracking" class="tracking">
+    <div class="container">
+      <h2>Track Your Progress</h2>
+      <p class="section-subtitle">Monitor your fitness journey with detailed analytics and insights</p>
+      <div class="tracking-dashboard">
+        <!-- Exercise Card -->
+        <!-- <div class="tracking-card">
+          <h3>
+            <div class="tracking-icon">
+              <i class="fas fa-running"></i>
+            </div> -->
+            <!-- Exercise -->
+          <!-- </h3>
+          <div id="exercise-content">
+            <p class="empty-text">No exercises logged today.</p>
+            <button id="add-exercise-btn" class="btn btn-action">
+              <i class="fas fa-plus"></i> Add Exercise
+            </button>
+          </div>
+        </div> -->
+
+        <!-- Meals Card -->
+        <!-- <div class="tracking-card">
+          <h3>
+            <div class="tracking-icon">
+              <i class="fas fa-utensils"></i>
+            </div>
+            Meals
+          </h3>
+          <div id="meals-content">
+            <p class="empty-text">No meals logged today.</p>
+            <button id="add-meal-btn" class="btn btn-action">
+              <i class="fas fa-plus"></i> Add Meal
+            </button>
+          </div>
+        </div> -->
+
+        <!-- Today's Progress Charts -->
+        <!-- <div class="tracking-card">
+          <h3>
+            <div class="tracking-icon">
+              <i class="fas fa-chart-pie"></i>
+            </div>
+            Today's Progress
+          </h3>
+          <div class="charts-container">
+            <div class="chart-wrapper">
+              <canvas id="caloriesChart"></canvas>
+              <p class="chart-label">Calories</p>
+            </div>
+            <div class="chart-wrapper">
+              <canvas id="exerciseChart"></canvas>
+              <p class="chart-label">Exercise</p>
+            </div>
+          </div>
+        </div> -->
+
+        <div class="tracking-card">
+          <h3>
+            <div class="tracking-icon">
+              <i class="fas fa-weight"></i>
+            </div>
+            Body Measurements
+          </h3>
+          <div class="tracking-stats">
+            <div class="stat-item">
+              <span class="stat-value">-5.2 kg</span>
+              <span class="stat-label">Weight Change</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-value">+2.1 kg</span>
+              <span class="stat-label">Muscle Mass</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="tracking-card">
+          <h3>
+            <div class="tracking-icon">
+              <i class="fas fa-trophy"></i>
+            </div>
+            Achievements
+          </h3>
+          <div class="achievement-list">
+            <div class="achievement">
+              <i class="fas fa-medal"></i>
+              <span>First Week Complete</span>
+            </div>
+            <div class="achievement">
+              <i class="fas fa-fire"></i>
+              <span>1000 Calories Burned</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+       
+
+  <!-- Generate Plan Section -->
+  <section id="generate-plan" class="generate-plan-section">
+    <div class="container">
+      <div class="generate-plan-content">
+        <div class="plan-info">
+          <h2><i class="fas fa-magic"></i> Get Your Personalized Fitness Plan</h2>
+          <p class="plan-subtitle">AI-powered recommendations tailored to your unique goals and fitness level</p>
+          
+          <div class="plan-features-grid">
+            <div class="plan-feature">
+              <div class="plan-feature-icon">
+                <i class="fas fa-utensils"></i>
+              </div>
+              <div class="plan-feature-text">
+                <h4>Custom Diet Plan</h4>
+                <p>Personalized meal plans with exact calories and macros</p>
+              </div>
+            </div>
+            
+            <div class="plan-feature">
+              <div class="plan-feature-icon">
+                <i class="fas fa-dumbbell"></i>
+              </div>
+              <div class="plan-feature-text">
+                <h4>Workout Schedule</h4>
+                <p>7-day workout routine based on your fitness level</p>
+              </div>
+            </div>
+            
+            <div class="plan-feature">
+              <div class="plan-feature-icon">
+                <i class="fas fa-chart-line"></i>
+              </div>
+              <div class="plan-feature-text">
+                <h4>Progress Tracking</h4>
+                <p>Monitor your journey with detailed analytics</p>
+              </div>
+            </div>
+            
+            <div class="plan-feature">
+              <div class="plan-feature-icon">
+                <i class="fas fa-brain"></i>
+              </div>
+              <div class="plan-feature-text">
+                <h4>AI-Powered Tips</h4>
+                <p>Smart recommendations to keep you motivated</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="plan-cta">
+            <a href="auth.html" class="btn btn-primary btn-lg">
+              <i class="fas fa-magic"></i> Generate My Free Plan
+            </a>
+            <p class="plan-note">✨ Powered by AI • No credit card required</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-content">
+        <h2>Ready to Transform Your Life?</h2>
+        <p>Start your fitness journey today with a free trial. No commitment, no credit card required.</p>
+        <div class="cta-features">
+          <div class="cta-feature">
+            <i class="fas fa-check"></i>
+            <span>7-day free trial</span>
+          </div>
+          <div class="cta-feature">
+            <i class="fas fa-check"></i>
+            <span>Cancel anytime</span>
+          </div>
+          <div class="cta-feature">
+            <i class="fas fa-check"></i>
+            <span>Access to all features</span>
+          </div>
+        </div>
+        <a href="auth.html" class="btn btn-primary btn-lg">Start Free Trial</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <div class="footer-logo">
+            <i class="fas fa-dumbbell"></i>
+            <span>FitSet</span>
+          </div>
+          <p>Transform your body and mind with our comprehensive fitness platform. Join thousands of people achieving their goals.</p>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+        <div class="footer-section">
+          <h4>Workouts</h4>
+          <ul>
+            <li><a href="#workouts">Strength Training</a></li>
+            <li><a href="#workouts">Cardio Workouts</a></li>
+            <li><a href="#workouts">Yoga & Flexibility</a></li>
+            <li><a href="#workouts">HIIT Training</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Contact</h4>
+          <div class="contact-info">
+            <p><i class="fas fa-envelope"></i> support@FitSet.com</p>
+            <p><i class="fas fa-phone"></i> 347658547x</p>
+            <p><i class="fas fa-map-marker-alt"></i> Available In India</p>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 FitSet. All rights reserved. | Transform your life, one workout at a time.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating Chatbot Button -->
+  <button class="chat-button" onclick="toggleChat()">
+    <i class="fas fa-comment-dots"></i>
+  </button>
+
+  <!-- Chatbot Popup -->
+  <div id="chatPopup" class="chat-popup">
+    <div class="chat-header">
+      <i class="fas fa-robot"></i> FitSet AI Assistant
+    </div>
+    <div id="chatBody" class="chat-body"></div>
+    <div class="chat-input">
+      <input type="text" id="chatInput" placeholder="Ask me anything about fitness..." />
+      <button onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
+    </div>
+  </div>
+
+  <script src="js/landing.js"></script>
+  <!-- 🌟 Gemini Chatbot Script -->
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const chatPopup = document.getElementById("chatPopup");
+    const chatBody = document.getElementById("chatBody");
+    const chatInput = document.getElementById("chatInput");
+
+    window.toggleChat = function () {
+      chatPopup.style.display = chatPopup.style.display === "flex" ? "none" : "flex";
+    };
+
+    window.sendMessage = async function () {
+      const userMessage = chatInput.value.trim();
+      if (!userMessage) return;
+
+      appendMessage("user", userMessage);
+      chatInput.value = "";
+      appendMessage("bot", "Thinking...");
+
+      try {
+        const reply = await getGeminiReply(userMessage);
+        const botMsgs = chatBody.querySelectorAll(".chat-message.bot");
+        if (botMsgs.length > 0) {
+          botMsgs[botMsgs.length - 1].remove();
+        }
+        appendMessage("bot", reply);
+      } catch (err) {
+        console.error("Chat error:", err);
+        const botMsgs = chatBody.querySelectorAll(".chat-message.bot");
+        if (botMsgs.length > 0) {
+          botMsgs[botMsgs.length - 1].remove();
+        }
+        appendMessage("bot", "Sorry, I'm having trouble responding right now. Please try again!");
+      }
+    };
+
+    chatInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") sendMessage();
+    });
+
+    function appendMessage(sender, text) {
+      const msgDiv = document.createElement("div");
+      msgDiv.className = `chat-message ${sender}`;
+      msgDiv.textContent = text;
+      chatBody.appendChild(msgDiv);
+      chatBody.scrollTop = chatBody.scrollHeight;
+      // maintain a lightweight conversation history for context
+      // skip pushing the transient 'Thinking...' placeholder
+      if (!window.chatHistory) window.chatHistory = [];
+      if (text && text !== 'Thinking...') {
+        if (sender === 'user') window.chatHistory.push({ role: 'user', content: text });
+        else if (sender === 'bot') window.chatHistory.push({ role: 'assistant', content: text });
+        // keep last 12 messages to limit payload
+        if (window.chatHistory.length > 12) window.chatHistory = window.chatHistory.slice(-12);
+      }
+    }
+
+    async function getGeminiReply(message) {
+      // Use backend proxy for Gemini API (more secure - API key is on server)
+      const url = "http://localhost:8080/api/chat/fitness-chat";
+      
+      // Build history string
+      let historyText = '';
+      if (window.chatHistory && window.chatHistory.length) {
+        window.chatHistory.forEach(m => {
+          historyText += `${m.role === 'user' ? 'User' : 'Assistant'}: ${m.content}\n`;
+        });
+      }
+
+      try {
+        const res = await fetch(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            message: message,
+            history: historyText
+          })
+        });
+        
+        if (!res.ok) {
+          const errorData = await res.json().catch(() => ({}));
+          throw new Error(errorData?.error || `API Error: ${res.status}`);
+        }
+        
+        const data = await res.json();
+        
+        if (data?.response) {
+          return data.response;
+        } else {
+          throw new Error("No response from server");
+        }
+      } catch (error) {
+        console.error('Chat error:', error);
+        throw error;
+      }
+    }
+  });
+</script>
+
+<!-- 🌟 Styles (you can also place this in your styles.css) -->
+<style>
+  .chat-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, #FF6B6B, #4ECDC4);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    font-size: 28px;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(255, 107, 107, 0.5);
+    z-index: 9999;
+    animation: pulse 2s infinite;
+    transition: all 0.3s;
+  }
+  
+  .chat-button:hover {
+    transform: scale(1.1);
+  }
+  
+  @keyframes pulse {
+    0%, 100% {
+      box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+    }
+    50% {
+      box-shadow: 0 4px 25px rgba(255, 107, 107, 0.7);
+    }
+  }
+
+  .chat-popup {
+    display: none;
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    width: 320px;
+    max-height: 500px;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    z-index: 9999;
+    flex-direction: column;
+  }
+  
+  .chat-popup[style*="flex"] {
+    display: flex !important;
+  }
+
+  .chat-header {
+    background: linear-gradient(135deg, #FF6B6B, #4ECDC4);
+    color: white;
+    padding: 12px;
+    font-weight: bold;
+    text-align: center;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+  }
+
+  .chat-body {
+    padding: 10px;
+    flex: 1;
+    overflow-y: auto;
+    font-size: 14px;
+  }
+
+  .chat-message {
+    margin: 6px 0;
+    padding: 8px 10px;
+    border-radius: 10px;
+    max-width: 80%;
+  }
+
+  .chat-message.user {
+    background: linear-gradient(135deg, #FF6B6B, #4ECDC4);
+    color: white;
+    align-self: flex-end;
+    text-align: right;
+    margin-left: auto;
+  }
+
+  .chat-message.bot {
+    background-color: #f0f0f0;
+    color: #333;
+    align-self: flex-start;
+    text-align: left;
+    margin-right: auto;
+  }
+
+  .chat-input {
+    display: flex;
+    border-top: 1px solid #ccc;
+  }
+
+  .chat-input input {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    outline: none;
+    font-size: 14px;
+  }
+
+  .chat-input button {
+    padding: 10px 15px;
+    background: linear-gradient(135deg, #FF6B6B, #4ECDC4);
+    border: none;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .chat-input button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 2px 8px rgba(255, 107, 107, 0.4);
+  }
+</style>
+
+</body>
+</html>

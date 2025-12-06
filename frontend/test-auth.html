@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auth Test Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .result {
+            margin-top: 10px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 4px;
+            white-space: pre-wrap;
+        }
+        .error {
+            color: red;
+        }
+        .success {
+            color: green;
+        }
+        input, select {
+            margin: 5px;
+            padding: 8px;
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <h1>FitSet Authentication Test</h1>
+    
+    <div class="test-section">
+        <h2>1. Check Backend Connection</h2>
+        <button onclick="testConnection()">Test Connection</button>
+        <div id="connection-result" class="result"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>2. Test Registration</h2>
+        <input type="email" id="test-reg-email" placeholder="Email" value="test@example.com"><br>
+        <input type="text" id="test-reg-username" placeholder="Username" value="testuser"><br>
+        <input type="password" id="test-reg-password" placeholder="Password" value="test123"><br>
+        <input type="number" id="test-reg-weight" placeholder="Weight (kg)" value="70"><br>
+        <input type="number" id="test-reg-height" placeholder="Height (cm)" value="170"><br>
+        <input type="number" id="test-reg-age" placeholder="Age" value="25"><br>
+        <button onclick="testRegister()">Test Register</button>
+        <div id="register-result" class="result"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>3. Test Login</h2>
+        <input type="email" id="test-login-email" placeholder="Email" value="test@example.com"><br>
+        <input type="password" id="test-login-password" placeholder="Password" value="test123"><br>
+        <button onclick="testLogin()">Test Login</button>
+        <div id="login-result" class="result"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>4. Test Protected Endpoint</h2>
+        <button onclick="testProtected()">Test Get Profile</button>
+        <div id="protected-result" class="result"></div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:8080/api';
+        let authToken = null;
+
+        async function testConnection() {
+            const resultDiv = document.getElementById('connection-result');
+            resultDiv.textContent = 'Testing connection...';
+            
+            try {
+                const response = await fetch(`${API_BASE}/auth/login`, {
+                    method: 'OPTIONS'
+                });
+                
+                resultDiv.innerHTML = `<span class="success">✓ Backend is reachable!</span>\n`;
+                resultDiv.innerHTML += `Status: ${response.status}\n`;
+                resultDiv.innerHTML += `CORS Headers: ${response.headers.get('Access-Control-Allow-Origin')}`;
+            } catch (error) {
+                resultDiv.innerHTML = `<span class="error">✗ Cannot connect to backend!</span>\n`;
+                resultDiv.innerHTML += `Error: ${error.message}\n`;
+                resultDiv.innerHTML += `\nPlease make sure:\n`;
+                resultDiv.innerHTML += `1. Backend is running on http://localhost:8080\n`;
+                resultDiv.innerHTML += `2. MongoDB is running\n`;
+                resultDiv.innerHTML += `3. No firewall blocking the connection`;
+            }
+        }
+
+        async function testRegister() {
+            const resultDiv = document.getElementById('register-result');
+            resultDiv.textContent = 'Registering...';
+            
+            const data = {
+                email: document.getElementById('test-reg-email').value,
+                username: document.getElementById('test-reg-username').value,
+                password: document.getElementById('test-reg-password').value,
+                weight: parseFloat(document.getElementById('test-reg-weight').value),
+                height: parseFloat(document.getElementById('test-reg-height').value),
+                age: parseInt(document.getElementById('test-reg-age').value),
+                gender: 'MALE',
+                fitnessGoal: 'MAINTENANCE',
+                activityLevel: 'MODERATE'
+            };
+            
+            try {
+                const response = await fetch(`${API_BASE}/auth/register`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok) {
+                    authToken = result.token;
+                    resultDiv.innerHTML = `<span class="success">✓ Registration successful!</span>\n`;
+                    resultDiv.innerHTML += JSON.stringify(result, null, 2);
+                } else {
+                    resultDiv.innerHTML = `<span class="error">✗ Registration failed!</span>\n`;
+                    resultDiv.innerHTML += JSON.stringify(result, null, 2);
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<span class="error">✗ Error:</span>\n${error.message}`;
+            }
+        }
+
+        async function testLogin() {
+            const resultDiv = document.getElementById('login-result');
+            resultDiv.textContent = 'Logging in...';
+            
+            const data = {
+                email: document.getElementById('test-login-email').value,
+                password: document.getElementById('test-login-password').value
+            };
+            
+            try {
+                const response = await fetch(`${API_BASE}/auth/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok) {
+                    authToken = result.token;
+                    resultDiv.innerHTML = `<span class="success">✓ Login successful!</span>\n`;
+                    resultDiv.innerHTML += JSON.stringify(result, null, 2);
+                } else {
+                    resultDiv.innerHTML = `<span class="error">✗ Login failed!</span>\n`;
+                    resultDiv.innerHTML += JSON.stringify(result, null, 2);
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<span class="error">✗ Error:</span>\n${error.message}`;
+            }
+        }
+
+        async function testProtected() {
+            const resultDiv = document.getElementById('protected-result');
+            
+            if (!authToken) {
+                resultDiv.innerHTML = `<span class="error">✗ No auth token! Please login first.</span>`;
+                return;
+            }
+            
+            resultDiv.textContent = 'Fetching profile...';
+            
+            try {
+                const response = await fetch(`${API_BASE}/user/profile`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok) {
+                    resultDiv.innerHTML = `<span class="success">✓ Protected endpoint working!</span>\n`;
+                    resultDiv.innerHTML += JSON.stringify(result, null, 2);
+                } else {
+                    resultDiv.innerHTML = `<span class="error">✗ Failed to access protected endpoint!</span>\n`;
+                    resultDiv.innerHTML += JSON.stringify(result, null, 2);
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<span class="error">✗ Error:</span>\n${error.message}`;
+            }
+        }
+    </script>
+</body>
+</html>

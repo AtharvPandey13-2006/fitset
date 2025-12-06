@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitSet - Fitness Assistant</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+    <!-- This is your authentication and dashboard app -->
+    <!-- Moved here to preserve your existing functionality -->
+    <div class="container" id="auth-container">
+        <!-- Login/Register Form -->
+        <div class="auth-box">
+            <div class="auth-header">
+                <h1><i class="fas fa-dumbbell"></i> FitSet</h1>
+                <p>Your Personal Fitness Assistant</p>
+            </div>
+            
+            <div class="auth-tabs">
+                <button class="tab-btn active" onclick="showLogin()">Login</button>
+                <button class="tab-btn" onclick="showRegister()">Register</button>
+            </div>
+            
+            <!-- Login Form -->
+            <form id="login-form" class="auth-form">
+                <div class="form-group">
+                    <label><i class="fas fa-envelope"></i> Email</label>
+                    <input type="email" id="login-email" required placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-lock"></i> Password</label>
+                    <div class="password-input-wrapper">
+                        <input type="password" id="login-password" required placeholder="Enter your password">
+                        <i class="fas fa-eye password-toggle" onclick="togglePassword('login-password', this)"></i>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+                <div id="login-error" class="error-message"></div>
+            </form>
+            
+            <!-- Register Form -->
+            <form id="register-form" class="auth-form" style="display:none;">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label><i class="fas fa-user"></i> Username</label>
+                        <input type="text" id="reg-username" required placeholder="Username">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-envelope"></i> Email</label>
+                        <input type="email" id="reg-email" required placeholder="Email">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label><i class="fas fa-lock"></i> Password</label>
+                    <div class="password-input-wrapper">
+                        <input type="password" id="reg-password" required placeholder="Password">
+                        <i class="fas fa-eye password-toggle" onclick="togglePassword('reg-password', this)"></i>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label><i class="fas fa-weight"></i> Weight (kg)</label>
+                        <input type="number" id="reg-weight" required placeholder="Weight" step="0.1">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-ruler-vertical"></i> Height (cm)</label>
+                        <input type="number" id="reg-height" required placeholder="Height" step="0.1">
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label><i class="fas fa-birthday-cake"></i> Age</label>
+                        <input type="number" id="reg-age" required placeholder="Age">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-venus-mars"></i> Gender</label>
+                        <select id="reg-gender">
+                            <option value="MALE">Male</option>
+                            <option value="FEMALE">Female</option>
+                            <option value="OTHER">Other</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label><i class="fas fa-bullseye"></i> Fitness Goal</label>
+                    <select id="reg-goal">
+                        <option value="WEIGHT_LOSS">Weight Loss</option>
+                        <option value="MUSCLE_GAIN">Muscle Gain</option>
+                        <option value="MAINTENANCE">Maintenance</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label><i class="fas fa-running"></i> Activity Level</label>
+                    <select id="reg-activity">
+                        <option value="SEDENTARY">Sedentary (Little or no exercise)</option>
+                        <option value="LIGHT">Light (Exercise 1-3 days/week)</option>
+                        <option value="MODERATE">Moderate (Exercise 3-5 days/week)</option>
+                        <option value="ACTIVE">Active (Exercise 6-7 days/week)</option>
+                        <option value="VERY_ACTIVE">Very Active (Physical job or training twice/day)</option>
+                    </select>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Register</button>
+                <div id="register-error" class="error-message"></div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Main Dashboard -->
+    <div class="dashboard" id="dashboard" style="display:none;">
+        <nav class="navbar">
+            <div class="nav-brand">
+                <i class="fas fa-dumbbell"></i> FitSet
+            </div>
+            <div class="nav-menu">
+                <a href="#" class="nav-link active" onclick="showSection('dashboard-section')">
+                    <i class="fas fa-home"></i> Dashboard
+                </a>
+                <a href="#" class="nav-link" onclick="showSection('recommendations-section')">
+                    <i class="fas fa-heart"></i> Recommendations
+                </a>
+                <a href="#" class="nav-link" onclick="showSection('tracking-section')">
+                    <i class="fas fa-clipboard-list"></i> Daily Tracking
+                </a>
+                <a href="#" class="nav-link" onclick="showSection('progress-section')">
+                    <i class="fas fa-chart-line"></i> Progress
+                </a>
+                <a href="#" class="nav-link" onclick="showSection('profile-section')">
+                    <i class="fas fa-user"></i> Profile
+                </a>
+                <a href="#" class="nav-link" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+            </div>
+        </nav>
+        
+        <div class="main-content">
+            <!-- Dashboard Section -->
+            <section id="dashboard-section" class="content-section active">
+                <h2>Welcome, <span id="user-name">User</span>! 👋</h2>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-weight"></i></div>
+                        <div class="stat-info">
+                            <h3 id="user-bmi">--</h3>
+                            <p>BMI</p>
+                            <span class="stat-badge" id="bmi-category">--</span>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-fire"></i></div>
+                        <div class="stat-info">
+                            <h3 id="calories-today">0</h3>
+                            <p>Calories Burned</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-dumbbell"></i></div>
+                        <div class="stat-info">
+                            <h3 id="exercise-today">0</h3>
+                            <p>Minutes Exercised</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-tint"></i></div>
+                        <div class="stat-info">
+                            <h3 id="water-today">0/8</h3>
+                            <p>Glasses of Water</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="quick-actions">
+                    <h3>Quick Actions</h3>
+                    <div class="action-buttons">
+                        <button class="btn btn-action" onclick="showSection('recommendations-section')">
+                            <i class="fas fa-sparkles"></i> View Recommendations
+                        </button>
+                        <button class="btn btn-action" onclick="showSection('tracking-section')">
+                            <i class="fas fa-plus-circle"></i> Log Activity
+                        </button>
+                        <button class="btn btn-action" onclick="generateRecommendations()">
+                            <i class="fas fa-magic"></i> Generate My Plan
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="motivation-box">
+                    <h3>💡 Today's Motivation</h3>
+                    <p id="daily-tip">Loading...</p>
+                </div>
+            </section>
+            
+            <!-- Recommendations Section -->
+            <section id="recommendations-section" class="content-section">
+                <h2>Your Personalized Plan</h2>
+                
+                <div class="recommendations-container">
+                    <div class="loading" id="recommendations-loading">
+                        <i class="fas fa-spinner fa-spin"></i> Loading recommendations...
+                    </div>
+                    
+                    <div id="recommendations-content" style="display:none;">
+                        <!-- Diet Plan -->
+                        <div class="plan-card">
+                            <h3><i class="fas fa-utensils"></i> Diet Plan</h3>
+                            <div class="macros-grid">
+                                <div class="macro-item">
+                                    <span class="macro-label">Daily Calories</span>
+                                    <span class="macro-value" id="rec-calories">--</span>
+                                </div>
+                                <div class="macro-item">
+                                    <span class="macro-label">Protein</span>
+                                    <span class="macro-value" id="rec-protein">--g</span>
+                                </div>
+                                <div class="macro-item">
+                                    <span class="macro-label">Carbs</span>
+                                    <span class="macro-value" id="rec-carbs">--g</span>
+                                </div>
+                                <div class="macro-item">
+                                    <span class="macro-label">Fats</span>
+                                    <span class="macro-value" id="rec-fats">--g</span>
+                                </div>
+                            </div>
+                            
+                            <h4>Meal Suggestions</h4>
+                            <div id="meal-suggestions"></div>
+                            
+                            <h4>Guidelines</h4>
+                            <ul id="diet-guidelines"></ul>
+                        </div>
+                        
+                        <!-- Workout Plan -->
+                        <div class="plan-card">
+                            <h3><i class="fas fa-running"></i> Workout Plan</h3>
+                            <div class="workout-info">
+                                <p><strong>Weekly Workouts:</strong> <span id="rec-weekly-workouts">--</span></p>
+                                <p><strong>Session Duration:</strong> <span id="rec-session-duration">--</span> minutes</p>
+                            </div>
+                            
+                            <h4>Weekly Schedule</h4>
+                            <div id="workout-schedule"></div>
+                            
+                            <h4>Guidelines</h4>
+                            <ul id="workout-guidelines"></ul>
+                        </div>
+                        
+                        <!-- Tips -->
+                        <div class="plan-card">
+                            <h3><i class="fas fa-lightbulb"></i> Motivational Tips</h3>
+                            <div id="tips-list"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Daily Tracking Section -->
+            <section id="tracking-section" class="content-section">
+                <h2>Daily Tracking - <span id="tracking-date"></span></h2>
+                
+                <div class="tracking-container">
+                    <!-- Exercise Tracking -->
+                    <div class="tracking-card">
+                        <h3>
+                            <div class="tracking-icon">
+                                <i class="fas fa-dumbbell"></i>
+                            </div>
+                            Exercise
+                        </h3>
+                        <div class="tracking-card-content">
+                            <div id="exercise-list" class="tracking-list">
+                                <p class="empty-text">No exercises logged today.</p>
+                            </div>
+                            <button class="btn btn-action" onclick="addExercise()">
+                                <i class="fas fa-plus"></i> Add Exercise
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Meal Tracking -->
+                    <div class="tracking-card">
+                        <h3>
+                            <div class="tracking-icon">
+                                <i class="fas fa-utensils"></i>
+                            </div>
+                            Meals
+                        </h3>
+                        <div class="tracking-card-content">
+                            <div id="meal-list" class="tracking-list">
+                                <p class="empty-text">No meals logged today.</p>
+                            </div>
+                            <button class="btn btn-action" onclick="addMeal()">
+                                <i class="fas fa-plus"></i> Add Meal
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Hydration Tracking -->
+                    <div class="tracking-card">
+                        <h3>
+                            <div class="tracking-icon">
+                                <i class="fas fa-tint"></i>
+                            </div>
+                            Hydration
+                        </h3>
+                        <div class="tracking-card-content">
+                            <div class="water-tracker">
+                                <div class="water-cups" id="water-cups"></div>
+                                <p>Glasses: <span id="water-count">0</span> / 8</p>
+                            </div>
+                            <button class="btn btn-action" onclick="addWater()">
+                                <i class="fas fa-plus"></i> Add Glass
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Notes -->
+                    <div class="tracking-card full-width">
+                        <h3><i class="fas fa-sticky-note"></i> Daily Notes</h3>
+                        <textarea id="daily-notes" placeholder="How did you feel today? Any observations?"></textarea>
+                        <button class="btn btn-primary" onclick="saveTracking()">
+                            <i class="fas fa-save"></i> Save Today's Progress
+                        </button>
+                        <button class="btn btn-secondary" style="margin-left:10px;" onclick="analyzeToday()">
+                            <i class="fas fa-magnifying-glass-chart"></i> Analyze Today's Workout
+                        </button>
+                    </div>
+
+                    <!-- AI Analysis -->
+                    <div class="tracking-card full-width" id="analysis-card" style="display:none;">
+                        <h3><i class="fas fa-robot"></i> AI Analysis</h3>
+                        <div id="analysis-content">
+                            <div class="loading" id="analysis-loading" style="display:none;">
+                                <i class="fas fa-spinner fa-spin"></i> Generating analysis...
+                            </div>
+                            <div id="analysis-result" style="display:none;"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Progress Section -->
+            <section id="progress-section" class="content-section">
+                <h2>Your Progress</h2>
+                
+                <div class="progress-container">
+                    <div class="progress-filters">
+                        <button class="btn btn-secondary active" onclick="loadProgress('week')">Last Week</button>
+                        <button class="btn btn-secondary" onclick="loadProgress('month')">Last Month</button>
+                        <button class="btn btn-secondary" onclick="loadProgress('all')">All Time</button>
+                    </div>
+                    
+                    <div id="progress-content">
+                        <!-- Charts Row 1 -->
+                        <div class="progress-charts-grid">
+                            <div class="progress-card chart-card">
+                                <h3><i class="fas fa-dumbbell"></i> Exercise Breakdown</h3>
+                                <canvas id="exerciseChart"></canvas>
+                                <div id="exercise-summary" class="chart-stats"></div>
+                            </div>
+                            
+                            <div class="progress-card chart-card">
+                                <h3><i class="fas fa-utensils"></i> Nutrition Overview</h3>
+                                <canvas id="nutritionChart"></canvas>
+                                <div id="nutrition-summary" class="chart-stats"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Charts Row 2 -->
+                        <div class="progress-charts-grid">
+                            <div class="progress-card chart-card">
+                                <h3><i class="fas fa-chart-line"></i> Calories Trend</h3>
+                                <canvas id="caloriesTrendChart"></canvas>
+                            </div>
+                            
+                            <div class="progress-card chart-card">
+                                <h3><i class="fas fa-fire"></i> Activity Distribution</h3>
+                                <canvas id="activityDistributionChart"></canvas>
+                            </div>
+                        </div>
+                        
+                        <!-- Activity History -->
+                        <div class="progress-card full-width">
+                            <h3><i class="fas fa-history"></i> Activity History</h3>
+                            <div id="activity-history"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Profile Section -->
+            <section id="profile-section" class="content-section">
+                <h2>Profile Settings</h2>
+                
+                <div class="profile-container">
+                    <form id="profile-form" class="profile-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Username</label>
+                                <input type="text" id="profile-username">
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" id="profile-email" readonly>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Weight (kg)</label>
+                                <input type="number" id="profile-weight" step="0.1">
+                            </div>
+                            <div class="form-group">
+                                <label>Height (cm)</label>
+                                <input type="number" id="profile-height" step="0.1">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Age</label>
+                                <input type="number" id="profile-age">
+                            </div>
+                            <div class="form-group">
+                                <label>Gender</label>
+                                <select id="profile-gender">
+                                    <option value="MALE">Male</option>
+                                    <option value="FEMALE">Female</option>
+                                    <option value="OTHER">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Fitness Goal</label>
+                            <select id="profile-goal">
+                                <option value="WEIGHT_LOSS">Weight Loss</option>
+                                <option value="MUSCLE_GAIN">Muscle Gain</option>
+                                <option value="MAINTENANCE">Maintenance</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Activity Level</label>
+                            <select id="profile-activity">
+                                <option value="SEDENTARY">Sedentary</option>
+                                <option value="LIGHT">Light</option>
+                                <option value="MODERATE">Moderate</option>
+                                <option value="ACTIVE">Active</option>
+                                <option value="VERY_ACTIVE">Very Active</option>
+                            </select>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Save Changes
+                        </button>
+                        <div id="profile-message" class="success-message"></div>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </div>
+    
+    <!-- Floating Chatbot Button -->
+    <div class="chat-fab" onclick="toggleChat()">
+        <i class="fas fa-comment-dots"></i>
+    </div>
+    
+    <!-- Chatbot Popup -->
+    <div id="chatPopup" class="chat-popup">
+        <div class="chat-header">
+            <h4><i class="fas fa-robot"></i> FitSet AI Assistant</h4>
+            <button onclick="toggleChat()" class="chat-close"><i class="fas fa-times"></i></button>
+        </div>
+        <div id="chatBody" class="chat-body"></div>
+        <div class="chat-input-container">
+            <input type="text" id="chatInput" placeholder="Ask me anything about fitness..." />
+            <button onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+    
+    <script src="js/app.js"></script>
+    <script>
+        // Password toggle function
+        function togglePassword(inputId, icon) {
+            const input = document.getElementById(inputId);
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+        
+        // Chatbot functionality
+        const chatPopup = document.getElementById("chatPopup");
+        const chatBody = document.getElementById("chatBody");
+        const chatInput = document.getElementById("chatInput");
+
+        function toggleChat() {
+            chatPopup.style.display = chatPopup.style.display === "flex" ? "none" : "flex";
+        }
+
+        async function sendMessage() {
+            const userMessage = chatInput.value.trim();
+            if (!userMessage) return;
+
+            appendMessage("user", userMessage);
+            chatInput.value = "";
+            appendMessage("bot", "Thinking...");
+
+            try {
+                const reply = await getGeminiReply(userMessage);
+                const botMsgs = chatBody.querySelectorAll(".chat-message.bot");
+                if (botMsgs.length > 0) {
+                    botMsgs[botMsgs.length - 1].remove();
+                }
+                appendMessage("bot", reply);
+            } catch (err) {
+                console.error("Chat error:", err);
+                const botMsgs = chatBody.querySelectorAll(".chat-message.bot");
+                if (botMsgs.length > 0) {
+                    botMsgs[botMsgs.length - 1].remove();
+                }
+                appendMessage("bot", "Sorry, I'm having trouble responding right now. Please try again!");
+            }
+        }
+
+        chatInput.addEventListener("keydown", (e) => {
+            if (e.key === "Enter") sendMessage();
+        });
+
+        function appendMessage(sender, text) {
+            const msgDiv = document.createElement("div");
+            msgDiv.className = `chat-message ${sender}`;
+            msgDiv.textContent = text;
+            chatBody.appendChild(msgDiv);
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
+
+        async function getGeminiReply(message) {
+            const apiKey = "AIzaSyC1gGfWTrx9rzEo0iiQPBLaN6jIiqAZMQA";
+            
+            // Try Gemini API first
+            try {
+                const res = await fetch(
+                    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key=${apiKey}`,
+                    {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            contents: [{
+                                parts: [{
+                                    text: `You are a helpful fitness assistant. Answer this question concisely: ${message}`
+                                }]
+                            }]
+                        })
+                    }
+                );
+                
+                if (!res.ok) {
+                    // If rate limit or other API error, use fallback
+                    return getFallbackResponse(message);
+                }
+                
+                const data = await res.json();
+                
+                if (data?.candidates?.[0]?.content?.parts?.[0]?.text) {
+                    return data.candidates[0].content.parts[0].text;
+                } else {
+                    return getFallbackResponse(message);
+                }
+            } catch (error) {
+                console.error("Gemini API Error:", error);
+                return getFallbackResponse(message);
+            }
+        }
+        
+        function getFallbackResponse(message) {
+            const msg = message.toLowerCase();
+            
+            // Fitness-related responses
+            if (msg.includes('workout') || msg.includes('exercise')) {
+                return "💪 Check out your personalized workout plan in the 'Recommendations' section! You'll find exercises tailored to your fitness level and goals.";
+            }
+            if (msg.includes('diet') || msg.includes('food') || msg.includes('eat') || msg.includes('nutrition')) {
+                return "🍎 Your custom diet plan is available in the 'Recommendations' section with meal suggestions and calorie targets based on your profile!";
+            }
+            if (msg.includes('weight') || msg.includes('lose') || msg.includes('gain')) {
+                return "⚖️ Track your weight progress in the 'Tracking' section. Your personalized plan is designed to help you reach your goals safely!";
+            }
+            if (msg.includes('protein') || msg.includes('carbs') || msg.includes('calories')) {
+                return "📊 Your daily macro targets are in the 'Recommendations' section. Make sure to complete your profile for accurate calculations!";
+            }
+            if (msg.includes('water') || msg.includes('hydration')) {
+                return "💧 Great question! Aim for 8 glasses of water daily. Track your water intake in the 'Tracking' section to stay hydrated!";
+            }
+            if (msg.includes('motivation') || msg.includes('help') || msg.includes('start')) {
+                return "🌟 You've got this! Start by clicking 'Generate My Plan' to get your personalized fitness roadmap. Small steps lead to big changes!";
+            }
+            if (msg.includes('hi') || msg.includes('hello') || msg.includes('hey')) {
+                return "👋 Hello! I'm your FitSet AI assistant. I can help you with workouts, nutrition, tracking, and motivation. What would you like to know?";
+            }
+            if (msg.includes('thank')) {
+                return "😊 You're welcome! Keep up the great work on your fitness journey!";
+            }
+            
+            // Default response
+            return "I'm here to help with your fitness journey! 💪 Try asking about workouts, diet plans, tracking progress, or click 'Generate My Plan' for personalized recommendations. (Note: AI responses are temporarily limited, but I can still guide you!)";
+        }
+    </script>
+</body>
+</html>

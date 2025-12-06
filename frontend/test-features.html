@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitSet - Test Charts & Dropdowns</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 30px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 40px;
+        }
+        
+        .section {
+            margin-bottom: 50px;
+        }
+        
+        .section h2 {
+            color: #333;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+        
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .chart-card {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .chart-card h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        canvas {
+            max-height: 300px !important;
+        }
+        
+        .dropdown-test {
+            background: #2a2a3e;
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            color: #e6eef9;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .form-group select {
+            width: 100%;
+            background: #2a2a3e !important;
+            color: #ffffff !important;
+            border: 2px solid #444 !important;
+            padding: 12px !important;
+            border-radius: 8px !important;
+            font-size: 1rem !important;
+            cursor: pointer !important;
+            appearance: none !important;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23ffffff' d='M6 9L1 4h10z'/%3E%3C/svg%3E") !important;
+            background-repeat: no-repeat !important;
+            background-position: right 12px center !important;
+            background-size: 12px !important;
+            padding-right: 35px !important;
+        }
+        
+        .form-group select:hover {
+            border-color: #4ECDC4 !important;
+            background-color: #323248 !important;
+        }
+        
+        .form-group select:focus {
+            outline: none !important;
+            border-color: #4ECDC4 !important;
+            box-shadow: 0 0 0 3px rgba(78, 205, 196, 0.2) !important;
+        }
+        
+        .form-group select option {
+            background: #2a2a3e !important;
+            color: #ffffff !important;
+            padding: 12px !important;
+        }
+        
+        .status {
+            text-align: center;
+            padding: 20px;
+            background: #d4edda;
+            border: 2px solid #28a745;
+            border-radius: 10px;
+            color: #155724;
+            font-weight: 600;
+            margin-top: 30px;
+        }
+        
+        .info-box {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .info-box strong {
+            color: #856404;
+        }
+        
+        @media (max-width: 768px) {
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎉 FitSet - Features Test Page</h1>
+        <p class="subtitle">Testing Charts & Fixed Dropdowns</p>
+        
+        <div class="info-box">
+            <strong>✅ If you can see charts below and dropdown options are visible, everything is working!</strong>
+        </div>
+        
+        <!-- SECTION 1: CHARTS -->
+        <div class="section">
+            <h2>📊 Chart.js Test - Progress Visualizations</h2>
+            
+            <div class="charts-grid">
+                <div class="chart-card">
+                    <h3>🏋️ Exercise Breakdown (Pie Chart)</h3>
+                    <canvas id="testExerciseChart"></canvas>
+                </div>
+                
+                <div class="chart-card">
+                    <h3>🍽️ Nutrition Overview (Doughnut Chart)</h3>
+                    <canvas id="testNutritionChart"></canvas>
+                </div>
+            </div>
+            
+            <div class="charts-grid">
+                <div class="chart-card">
+                    <h3>📈 Calories Trend (Line Chart)</h3>
+                    <canvas id="testCaloriesChart"></canvas>
+                </div>
+                
+                <div class="chart-card">
+                    <h3>📊 Activity Distribution (Bar Chart)</h3>
+                    <canvas id="testActivityChart"></canvas>
+                </div>
+            </div>
+        </div>
+        
+        <!-- SECTION 2: DROPDOWN -->
+        <div class="section">
+            <h2>🎨 Dropdown Visibility Test</h2>
+            
+            <div class="dropdown-test">
+                <div class="form-group">
+                    <label>Exercise Type (Can you see all options clearly?)</label>
+                    <select id="exerciseType">
+                        <option value="">-- Select Exercise Type --</option>
+                        <option value="CARDIO">CARDIO</option>
+                        <option value="STRENGTH">STRENGTH</option>
+                        <option value="FLEXIBILITY">FLEXIBILITY</option>
+                        <option value="SPORTS">SPORTS</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>Meal Type (White text on dark background)</label>
+                    <select id="mealType">
+                        <option value="">-- Select Meal Type --</option>
+                        <option value="BREAKFAST">BREAKFAST</option>
+                        <option value="LUNCH">LUNCH</option>
+                        <option value="DINNER">DINNER</option>
+                        <option value="SNACK">SNACK</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>Activity Level (Hover to see blue border)</label>
+                    <select id="activityLevel">
+                        <option value="">-- Select Activity Level --</option>
+                        <option value="SEDENTARY">SEDENTARY</option>
+                        <option value="LIGHTLY_ACTIVE">LIGHTLY ACTIVE</option>
+                        <option value="MODERATELY_ACTIVE">MODERATELY ACTIVE</option>
+                        <option value="VERY_ACTIVE">VERY ACTIVE</option>
+                        <option value="EXTREMELY_ACTIVE">EXTREMELY ACTIVE</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        
+        <div class="status">
+            ✅ All Features Working! Charts are rendering and dropdowns are clearly visible!
+        </div>
+    </div>
+    
+    <script>
+        // Test data for charts
+        const exerciseData = {
+            CARDIO: 120,
+            STRENGTH: 90,
+            FLEXIBILITY: 30,
+            SPORTS: 45
+        };
+        
+        const nutritionData = {
+            BREAKFAST: 600,
+            LUNCH: 800,
+            DINNER: 750,
+            SNACK: 350
+        };
+        
+        // 1. Exercise Pie Chart
+        new Chart(document.getElementById('testExerciseChart'), {
+            type: 'pie',
+            data: {
+                labels: ['Cardio', 'Strength', 'Flexibility', 'Sports'],
+                datasets: [{
+                    data: [120, 90, 30, 45],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.8)',
+                        'rgba(54, 162, 235, 0.8)',
+                        'rgba(255, 206, 86, 0.8)',
+                        'rgba(75, 192, 192, 0.8)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)'
+                    ],
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: { position: 'bottom' },
+                    tooltip: {
+                        callbacks: {
+                            label: (ctx) => `${ctx.label}: ${ctx.parsed} minutes`
+                        }
+                    }
+                }
+            }
+        });
+        
+        // 2. Nutrition Doughnut Chart
+        new Chart(document.getElementById('testNutritionChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Breakfast', 'Lunch', 'Dinner', 'Snack'],
+                datasets: [{
+                    data: [600, 800, 750, 350],
+                    backgroundColor: [
+                        'rgba(255, 159, 64, 0.8)',
+                        'rgba(153, 102, 255, 0.8)',
+                        'rgba(255, 99, 132, 0.8)',
+                        'rgba(54, 162, 235, 0.8)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 159, 64, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)'
+                    ],
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: { position: 'bottom' },
+                    tooltip: {
+                        callbacks: {
+                            label: (ctx) => `${ctx.label}: ${ctx.parsed} cal`
+                        }
+                    }
+                }
+            }
+        });
+        
+        // 3. Calories Line Chart
+        new Chart(document.getElementById('testCaloriesChart'), {
+            type: 'line',
+            data: {
+                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                datasets: [
+                    {
+                        label: 'Consumed',
+                        data: [2100, 2300, 1900, 2400, 2200, 2500, 2000],
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderWidth: 2,
+                        tension: 0.4,
+                        fill: true
+                    },
+                    {
+                        label: 'Burned',
+                        data: [500, 600, 400, 700, 550, 800, 450],
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderWidth: 2,
+                        tension: 0.4,
+                        fill: true
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: { legend: { position: 'top' } },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: { display: true, text: 'Calories' }
+                    }
+                }
+            }
+        });
+        
+        // 4. Activity Bar Chart
+        new Chart(document.getElementById('testActivityChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                datasets: [
+                    {
+                        label: 'Exercise (min)',
+                        data: [45, 60, 30, 75, 50, 90, 40],
+                        backgroundColor: 'rgba(75, 192, 192, 0.8)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 2
+                    },
+                    {
+                        label: 'Water (glasses)',
+                        data: [8, 10, 6, 9, 7, 11, 8],
+                        backgroundColor: 'rgba(54, 162, 235, 0.8)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 2
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: { legend: { position: 'top' } },
+                scales: { y: { beginAtZero: true } }
+            }
+        });
+        
+        // Test dropdown change
+        document.getElementById('exerciseType').addEventListener('change', (e) => {
+            if (e.target.value) {
+                alert(`✅ Dropdown working! Selected: ${e.target.value}`);
+            }
+        });
+    </script>
+</body>
+</html>

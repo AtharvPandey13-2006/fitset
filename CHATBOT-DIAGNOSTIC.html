@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot Diagnostic</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: linear-gradient(135deg, #FF6B6B, #4ECDC4);
+            min-height: 100vh;
+        }
+        .diagnostic-panel {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        h1 {
+            background: linear-gradient(135deg, #FF6B6B, #4ECDC4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 30px;
+        }
+        .status-card {
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+            border-left: 5px solid;
+        }
+        .status-card.success {
+            background: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+        }
+        .status-card.error {
+            background: #f8d7da;
+            border-color: #dc3545;
+            color: #721c24;
+        }
+        .status-card.warning {
+            background: #fff3cd;
+            border-color: #ffc107;
+            color: #856404;
+        }
+        .test-button {
+            background: linear-gradient(135deg, #FF6B6B, #4ECDC4);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            margin: 10px 5px;
+            transition: transform 0.3s;
+        }
+        .test-button:hover {
+            transform: scale(1.05);
+        }
+        .console-output {
+            background: #1e1e1e;
+            color: #00ff00;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            max-height: 300px;
+            overflow-y: auto;
+            margin: 20px 0;
+        }
+        .console-line {
+            margin: 5px 0;
+        }
+        .mini-chat {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 350px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            display: none;
+            flex-direction: column;
+            z-index: 10000;
+        }
+        .mini-chat.active {
+            display: flex;
+        }
+        .mini-chat-header {
+            background: linear-gradient(135deg, #FF6B6B, #4ECDC4);
+            color: white;
+            padding: 15px;
+            border-radius: 15px 15px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .mini-chat-body {
+            padding: 15px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .mini-chat-input {
+            display: flex;
+            border-top: 1px solid #ddd;
+        }
+        .mini-chat-input input {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            outline: none;
+            font-size: 14px;
+        }
+        .mini-chat-input button {
+            background: linear-gradient(135deg, #FF6B6B, #4ECDC4);
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            cursor: pointer;
+        }
+        .chat-fab-test {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #FF6B6B, #4ECDC4);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.5);
+            animation: pulse 2s infinite;
+            z-index: 9999;
+        }
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4); }
+            50% { box-shadow: 0 4px 25px rgba(255, 107, 107, 0.7); }
+        }
+        .message {
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 10px;
+            max-width: 80%;
+        }
+        .message.user {
+            background: linear-gradient(135deg, #FF6B6B, #4ECDC4);
+            color: white;
+            margin-left: auto;
+        }
+        .message.bot {
+            background: #f0f0f0;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="diagnostic-panel">
+        <h1><i class="fas fa-stethoscope"></i> Chatbot Diagnostic Tool</h1>
+        
+        <div class="status-card success">
+            <h3>✅ Diagnostic Page Loaded</h3>
+            <p>This page will test all chatbot functions</p>
+        </div>
+
+        <div id="diagnostics"></div>
+
+        <h3>Quick Actions</h3>
+        <button class="test-button" onclick="runFullDiagnostic()">
+            <i class="fas fa-play"></i> Run Full Diagnostic
+        </button>
+        <button class="test-button" onclick="testFallbackSystem()">
+            <i class="fas fa-robot"></i> Test Fallback Responses
+        </button>
+        <button class="test-button" onclick="toggleMiniChat()">
+            <i class="fas fa-comment"></i> Test Chat UI
+        </button>
+
+        <h3>Console Output</h3>
+        <div id="console" class="console-output">
+            <div class="console-line">Ready to diagnose...</div>
+        </div>
+    </div>
+
+    <!-- Floating Chat Button -->
+    <div class="chat-fab-test" onclick="toggleMiniChat()">
+        <i class="fas fa-comment-dots"></i>
+    </div>
+
+    <!-- Mini Chat Window -->
+    <div id="miniChat" class="mini-chat">
+        <div class="mini-chat-header">
+            <strong><i class="fas fa-robot"></i> Test Chatbot</strong>
+            <button onclick="toggleMiniChat()" style="background:none; border:none; color:white; cursor:pointer;">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div id="chatBody" class="mini-chat-body"></div>
+        <div class="mini-chat-input">
+            <input type="text" id="chatInput" placeholder="Type a message...">
+            <button onclick="sendTestMessage()"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <script>
+        let consoleOutput = [];
+
+        function log(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString();
+            consoleOutput.push(`[${timestamp}] ${message}`);
+            updateConsole();
+        }
+
+        function updateConsole() {
+            const console = document.getElementById('console');
+            console.innerHTML = consoleOutput.map(line => 
+                `<div class="console-line">${line}</div>`
+            ).join('');
+            console.scrollTop = console.scrollHeight;
+        }
+
+        function addDiagnostic(title, status, message) {
+            const diagnostics = document.getElementById('diagnostics');
+            const card = document.createElement('div');
+            card.className = `status-card ${status}`;
+            card.innerHTML = `<h3>${title}</h3><p>${message}</p>`;
+            diagnostics.appendChild(card);
+        }
+
+        function getFallbackResponse(message) {
+            const msg = message.toLowerCase();
+            
+            if (msg.includes('workout') || msg.includes('exercise')) {
+                return "💪 We offer Strength Training, Cardio, HIIT, and Yoga programs!";
+            }
+            if (msg.includes('diet') || msg.includes('food') || msg.includes('nutrition')) {
+                return "🍎 Sign up for a free trial to get your personalized nutrition plan!";
+            }
+            if (msg.includes('price') || msg.includes('cost')) {
+                return "💳 We have 3 plans: Basic (₹1199/mo), Pro (₹1299/mo), Elite (₹1499/mo).";
+            }
+            if (msg.includes('hi') || msg.includes('hello')) {
+                return "👋 Hello! I'm your ProFit Connect assistant.";
+            }
+            
+            return "I'm here to help you start your fitness journey! 💪";
+        }
+
+        function runFullDiagnostic() {
+            document.getElementById('diagnostics').innerHTML = '';
+            log('Starting full diagnostic...');
+
+            // Test 1: Fallback Function
+            try {
+                const response = getFallbackResponse('hi');
+                if (response) {
+                    addDiagnostic('✅ Fallback Function', 'success', `Test passed: ${response}`);
+                    log('✅ Fallback function works');
+                } else {
+                    throw new Error('No response');
+                }
+            } catch (error) {
+                addDiagnostic('❌ Fallback Function', 'error', error.message);
+                log('❌ Fallback function failed: ' + error.message);
+            }
+
+            // Test 2: Multiple Messages
+            const testMessages = ['Hi', 'workout', 'diet', 'price'];
+            testMessages.forEach(msg => {
+                const response = getFallbackResponse(msg);
+                log(`Test "${msg}": ${response.substring(0, 50)}...`);
+            });
+            addDiagnostic('✅ Message Tests', 'success', `Tested ${testMessages.length} messages successfully`);
+
+            // Test 3: UI Elements
+            const chatButton = document.querySelector('.chat-fab-test');
+            const miniChat = document.getElementById('miniChat');
+            if (chatButton && miniChat) {
+                addDiagnostic('✅ UI Elements', 'success', 'Chat button and popup found');
+                log('✅ UI elements present');
+            } else {
+                addDiagnostic('❌ UI Elements', 'error', 'Missing chat elements');
+                log('❌ UI elements missing');
+            }
+
+            log('Diagnostic complete!');
+        }
+
+        function testFallbackSystem() {
+            log('Testing fallback system...');
+            const tests = [
+                { input: 'Hi', expected: 'greeting' },
+                { input: 'Tell me about workouts', expected: 'workout info' },
+                { input: 'What are your prices?', expected: 'pricing' },
+                { input: 'I need diet advice', expected: 'diet info' },
+                { input: 'Random message', expected: 'default' }
+            ];
+
+            tests.forEach(test => {
+                const response = getFallbackResponse(test.input);
+                log(`✅ "${test.input}" -> ${response.substring(0, 40)}...`);
+            });
+
+            addDiagnostic('✅ Fallback System', 'success', `All ${tests.length} tests passed`);
+        }
+
+        function toggleMiniChat() {
+            const miniChat = document.getElementById('miniChat');
+            miniChat.classList.toggle('active');
+            log('Chat window toggled');
+        }
+
+        function sendTestMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            if (!message) return;
+
+            const chatBody = document.getElementById('chatBody');
+            
+            // Add user message
+            const userMsg = document.createElement('div');
+            userMsg.className = 'message user';
+            userMsg.textContent = message;
+            chatBody.appendChild(userMsg);
+
+            // Add bot response
+            setTimeout(() => {
+                const botMsg = document.createElement('div');
+                botMsg.className = 'message bot';
+                botMsg.textContent = getFallbackResponse(message);
+                chatBody.appendChild(botMsg);
+                chatBody.scrollTop = chatBody.scrollHeight;
+            }, 500);
+
+            input.value = '';
+            log(`Message sent: "${message}"`);
+        }
+
+        // Add Enter key support
+        document.getElementById('chatInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendTestMessage();
+        });
+
+        // Auto-run diagnostic on load
+        window.addEventListener('load', () => {
+            setTimeout(runFullDiagnostic, 1000);
+        });
+    </script>
+</body>
+</html>

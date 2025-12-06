@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot Test</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #FF6B6B;
+            margin-bottom: 20px;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 5px;
+        }
+        .test-input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .test-button {
+            background: linear-gradient(135deg, #FF6B6B, #4ECDC4);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .test-button:hover {
+            transform: scale(1.05);
+        }
+        .response {
+            margin-top: 15px;
+            padding: 15px;
+            background: #e8f5e9;
+            border-left: 4px solid #4ECDC4;
+            border-radius: 5px;
+            min-height: 50px;
+        }
+        .status {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .status.success { background: #d4edda; color: #155724; }
+        .status.error { background: #f8d7da; color: #721c24; }
+        .quick-tests {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin: 20px 0;
+        }
+        .quick-test-btn {
+            padding: 10px;
+            background: #4ECDC4;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .quick-test-btn:hover {
+            background: #45B7AF;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1><i class="fas fa-robot"></i> Chatbot Response Test</h1>
+        
+        <div class="status success">
+            <strong>✅ Fallback System Active</strong> - Chatbot will respond even without Gemini API
+        </div>
+
+        <div class="test-section">
+            <h3>Quick Tests</h3>
+            <div class="quick-tests">
+                <button class="quick-test-btn" onclick="testMessage('Hi')">Test: Hi</button>
+                <button class="quick-test-btn" onclick="testMessage('Tell me about workouts')">Test: Workouts</button>
+                <button class="quick-test-btn" onclick="testMessage('What are your prices?')">Test: Pricing</button>
+                <button class="quick-test-btn" onclick="testMessage('I need diet advice')">Test: Diet</button>
+                <button class="quick-test-btn" onclick="testMessage('How do I start?')">Test: Start</button>
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h3>Custom Message Test</h3>
+            <input type="text" id="testInput" class="test-input" placeholder="Type your message here..." value="Hi, how are you?">
+            <button class="test-button" onclick="testCustomMessage()">
+                <i class="fas fa-paper-plane"></i> Test Response
+            </button>
+            <div id="response" class="response">
+                <em>Response will appear here...</em>
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h3>Test Results</h3>
+            <div id="testResults"></div>
+        </div>
+    </div>
+
+    <script>
+        let testCount = 0;
+        
+        function getFallbackResponse(message) {
+            const msg = message.toLowerCase();
+            
+            // Fitness-related responses
+            if (msg.includes('workout') || msg.includes('exercise')) {
+                return "💪 We offer Strength Training, Cardio, HIIT, and Yoga programs! Scroll up to see our workout section or sign up to get a personalized plan.";
+            }
+            if (msg.includes('diet') || msg.includes('food') || msg.includes('eat') || msg.includes('nutrition')) {
+                return "🍎 Sign up for a free trial to get your personalized nutrition plan with meal suggestions and calorie targets!";
+            }
+            if (msg.includes('price') || msg.includes('cost') || msg.includes('plan')) {
+                return "💳 We have 3 plans: Basic (₹1199/mo), Pro (₹1299/mo - Most Popular), and Elite (₹1499/mo). All include a 7-day free trial!";
+            }
+            if (msg.includes('trainer') || msg.includes('coach')) {
+                return "👨‍🏫 Meet our certified trainers in the 'Trainers' section above! We have experts in Strength, HIIT, Yoga, and Nutrition.";
+            }
+            if (msg.includes('start') || msg.includes('begin') || msg.includes('trial')) {
+                return "🚀 Click the 'Start Free Trial' button to begin your fitness journey! No credit card required for the 7-day trial.";
+            }
+            if (msg.includes('hi') || msg.includes('hello') || msg.includes('hey')) {
+                return "👋 Hello! I'm your ProFit Connect assistant. I can help you with workouts, pricing, trainers, and getting started. What would you like to know?";
+            }
+            if (msg.includes('thank')) {
+                return "😊 You're welcome! Ready to transform your life? Start your free trial today!";
+            }
+            
+            // Default response
+            return "I'm here to help you start your fitness journey! 💪 Ask me about workouts, nutrition plans, pricing, or click 'Start Free Trial' to get your personalized plan. (Note: AI is in smart fallback mode!)";
+        }
+
+        async function testMessage(message) {
+            testCount++;
+            const responseDiv = document.getElementById('response');
+            const resultsDiv = document.getElementById('testResults');
+            
+            responseDiv.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Testing...';
+            document.getElementById('testInput').value = message;
+            
+            try {
+                const response = getFallbackResponse(message);
+                responseDiv.innerHTML = `<strong>Response:</strong><br>${response}`;
+                
+                resultsDiv.innerHTML = `<div class="status success">
+                    <strong>Test ${testCount} - SUCCESS ✅</strong><br>
+                    Input: "${message}"<br>
+                    Response received: ${response.substring(0, 100)}...
+                </div>` + resultsDiv.innerHTML;
+            } catch (error) {
+                responseDiv.innerHTML = `<strong style="color: red;">Error:</strong><br>${error.message}`;
+                resultsDiv.innerHTML = `<div class="status error">
+                    <strong>Test ${testCount} - FAILED ❌</strong><br>
+                    Input: "${message}"<br>
+                    Error: ${error.message}
+                </div>` + resultsDiv.innerHTML;
+            }
+        }
+
+        function testCustomMessage() {
+            const input = document.getElementById('testInput');
+            testMessage(input.value);
+        }
+
+        // Auto-run test on load
+        window.addEventListener('load', () => {
+            setTimeout(() => testMessage('Hi'), 500);
+        });
+    </script>
+</body>
+</html>

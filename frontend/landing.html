@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ProFit Connect - Transform Your Body, Transform Your Life</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <link rel="stylesheet" href="landing.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-logo">
+        <i class="fas fa-dumbbell"></i>
+        <span>ProFit Connect</span>
+      </div>
+      <ul class="nav-menu">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#workouts">Workouts</a></li>
+        <li><a href="#trainers">Trainers</a></li>
+        <li><a href="#tracking">Progress</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="index.html" class="nav-cta">Start Free Trial</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="hero-container">
+      <div class="hero-content">
+        <h1>Transform Your Body, Transform Your Life</h1>
+        <p class="hero-subtitle">
+          Join thousands of people who have achieved their fitness goals with our
+          personalized training programs, expert nutrition guidance, and
+          cutting-edge workout routines.
+        </p>
+        <div class="hero-buttons">
+          <a href="index.html" class="btn btn-primary">Start Your Journey</a>
+          <a href="#workouts" class="btn btn-secondary">View Workouts</a>
+        </div>
+      </div>
+      <div class="hero-image">
+        <div class="hero-graphic">
+          <i class="fas fa-running"></i>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features">
+    <div class="container">
+      <h2>Why Choose ProFit Connect?</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-dumbbell"></i>
+          </div>
+          <h3>Personalized Workouts</h3>
+          <p>Custom workout plans tailored to your fitness level, goals, and available equipment.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-chart-line"></i>
+          </div>
+          <h3>Progress Tracking</h3>
+          <p>Track your fitness journey with detailed analytics and progress photos.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-apple-alt"></i>
+          </div>
+          <h3>Nutrition Plans</h3>
+          <p>Expert-designed meal plans and nutrition guidance to fuel your workouts.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <h3>Expert Trainers</h3>
+          <p>Connect with certified personal trainers for personalized coaching and motivation.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Workouts Section -->
+  <section id="workouts" class="workouts">
+    <div class="container">
+      <h2>Workout Programs</h2>
+      <p class="section-subtitle">
+        Choose from our variety of workout programs designed for all fitness levels
+      </p>
+      <div class="workout-categories">
+        <button class="category-btn active" data-category="all">All Workouts</button>
+        <button class="category-btn" data-category="strength">Strength</button>
+        <button class="category-btn" data-category="cardio">Cardio</button>
+        <button class="category-btn" data-category="yoga">Yoga</button>
+        <button class="category-btn" data-category="hiit">HIIT</button>
+      </div>
+      <div class="workouts-grid">
+        <div class="workout-card" data-category="strength">
+          <div class="workout-image">
+            <i class="fas fa-dumbbell"></i>
+            <div class="workout-difficulty">Beginner</div>
+          </div>
+          <div class="workout-info">
+            <h3>Full Body Strength</h3>
+            <p>Build muscle and strength with this comprehensive full-body workout routine.</p>
+            <div class="workout-meta">
+              <span><i class="fas fa-clock"></i> 45 min</span>
+              <span><i class="fas fa-fire"></i> 300 cal</span>
+            </div>
+            <a href="index.html" class="btn btn-outline">Start Workout</a>
+          </div>
+        </div>
+
+        <div class="workout-card" data-category="cardio">
+          <div class="workout-image">
+            <i class="fas fa-running"></i>
+            <div class="workout-difficulty">Intermediate</div>
+          </div>
+          <div class="workout-info">
+            <h3>Cardio Blast</h3>
+            <p>High-energy cardio workout to burn calories and improve cardiovascular health.</p>
+            <div class="workout-meta">
+              <span><i class="fas fa-clock"></i> 30 min</span>
+              <span><i class="fas fa-fire"></i> 400 cal</span>
+            </div>
+            <a href="index.html" class="btn btn-outline">Start Workout</a>
+          </div>
+        </div>
+
+        <div class="workout-card" data-category="yoga">
+          <div class="workout-image">
+            <i class="fas fa-leaf"></i>
+            <div class="workout-difficulty">All Levels</div>
+          </div>
+          <div class="workout-info">
+            <h3>Morning Yoga Flow</h3>
+            <p>Start your day with this energizing yoga sequence for flexibility and mindfulness.</p>
+            <div class="workout-meta">
+              <span><i class="fas fa-clock"></i> 25 min</span>
+              <span><i class="fas fa-fire"></i> 150 cal</span>
+            </div>
+            <a href="index.html" class="btn btn-outline">Start Workout</a>
+          </div>
+        </div>
+
+        <div class="workout-card" data-category="hiit">
+          <div class="workout-image">
+            <i class="fas fa-bolt"></i>
+            <div class="workout-difficulty">Advanced</div>
+          </div>
+          <div class="workout-info">
+            <h3>HIIT Power</h3>
+            <p>High-intensity interval training for maximum fat burning and fitness gains.</p>
+            <div class="workout-meta">
+              <span><i class="fas fa-clock"></i> 20 min</span>
+              <span><i class="fas fa-fire"></i> 500 cal</span>
+            </div>
+            <a href="index.html" class="btn btn-outline">Start Workout</a>
+          </div>
+        </div>
+
+        <div class="workout-card" data-category="strength">
+          <div class="workout-image">
+            <i class="fas fa-weight-hanging"></i>
+            <div class="workout-difficulty">Intermediate</div>
+          </div>
+          <div class="workout-info">
+            <h3>Upper Body Focus</h3>
+            <p>Target your chest, shoulders, and arms with this focused upper body routine.</p>
+            <div class="workout-meta">
+              <span><i class="fas fa-clock"></i> 40 min</span>
+              <span><i class="fas fa-fire"></i> 280 cal</span>
+            </div>
+            <a href="index.html" class="btn btn-outline">Start Workout</a>
+          </div>
+        </div>
+
+        <div class="workout-card" data-category="cardio">
+          <div class="workout-image">
+            <i class="fas fa-bicycle"></i>
+            <div class="workout-difficulty">Beginner</div>
+          </div>
+          <div class="workout-info">
+            <h3>Cycling Cardio</h3>
+            <p>Low-impact cardio workout perfect for beginners and recovery days.</p>
+            <div class="workout-meta">
+              <span><i class="fas fa-clock"></i> 35 min</span>
+              <span><i class="fas fa-fire"></i> 250 cal</span>
+            </div>
+            <a href="index.html" class="btn btn-outline">Start Workout</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trainers Section -->
+  <section id="trainers" class="trainers">
+    <div class="container">
+      <h2>Meet Our Experts</h2>
+      <p class="section-subtitle">Connect with certified fitness professionals</p>
+      <div class="trainers-grid">
+        <!-- Expert Card 1 -->
+        <div class="trainer-card">
+          <div class="trainer-image">
+            <i class="fas fa-user-circle"></i>
+            <div class="trainer-badge">Certified</div>
+          </div>
+          <div class="trainer-info">
+            <h3>Shivam Gautam</h3>
+            <p class="trainer-specialty">Strength & Conditioning Coach</p>
+            <p class="trainer-experience">Experienced in powerlifting and bodybuilding</p>
+            <div class="trainer-rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+            <div class="trainer-price">₹499 / session</div>
+            <div class="trainer-specialties">
+              <span class="specialty-tag">Strength Training</span>
+              <span class="specialty-tag">Bodybuilding</span>
+            </div>
+            <a href="index.html" class="btn btn-outline">Book Session</a>
+          </div>
+        </div>
+
+        <!-- Expert Card 2 -->
+        <div class="trainer-card">
+          <div class="trainer-image">
+            <i class="fas fa-user-circle"></i>
+            <div class="trainer-badge">Certified</div>
+          </div>
+          <div class="trainer-info">
+            <h3>Bhoomika Chaudhary</h3>
+            <p class="trainer-specialty">HIIT & Cardio Specialist</p>
+            <p class="trainer-experience">Specializing in high-intensity training</p>
+            <div class="trainer-rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+            <div class="trainer-price">₹249 / session</div>
+            <div class="trainer-specialties">
+              <span class="specialty-tag">HIIT</span>
+              <span class="specialty-tag">Cardio</span>
+            </div>
+            <a href="index.html" class="btn btn-outline">Book Session</a>
+          </div>
+        </div>
+
+        <!-- Expert Card 3 -->
+        <div class="trainer-card">
+          <div class="trainer-image">
+            <i class="fas fa-user-circle"></i>
+            <div class="trainer-badge">Certified</div>
+          </div>
+          <div class="trainer-info">
+            <h3>Shilpa Shetty</h3>
+            <p class="trainer-specialty">Yoga & Flexibility Coach</p>
+            <p class="trainer-experience">Experienced in yoga instruction and mobility training</p>
+            <div class="trainer-rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+            <div class="trainer-price">₹199 / session</div>
+            <div class="trainer-specialties">
+              <span class="specialty-tag">Yoga</span>
+              <span class="specialty-tag">Flexibility</span>
+            </div>
+            <a href="index.html" class="btn btn-outline">Book Session</a>
+          </div>
+        </div>
+
+        <!-- Expert Card 4 -->
+        <div class="trainer-card">
+          <div class="trainer-image">
+            <i class="fas fa-user-circle"></i>
+            <div class="trainer-badge">Certified</div>
+          </div>
+          <div class="trainer-info">
+            <h3>Akriti Yadav</h3>
+            <p class="trainer-specialty">Nutrition & Wellness Coach</p>
+            <p class="trainer-experience">Experienced in sports nutrition and weight management</p>
+            <div class="trainer-rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+            <div class="trainer-price">₹299 / session</div>
+            <div class="trainer-specialties">
+              <span class="specialty-tag">Nutrition</span>
+              <span class="specialty-tag">Weight Loss</span>
+            </div>
+            <a href="index.html" class="btn btn-outline">Book Session</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Progress Tracking Section -->
+  <section id="tracking" class="tracking">
+    <div class="container">
+      <h2>Track Your Progress</h2>
+      <p class="section-subtitle">Monitor your fitness journey with detailed analytics and insights</p>
+      <div class="tracking-dashboard">
+        <div class="tracking-card">
+          <div class="tracking-icon">
+            <i class="fas fa-chart-line"></i>
+          </div>
+          <h3>Workout Analytics</h3>
+          <div class="tracking-stats">
+            <div class="stat-item">
+              <span class="stat-value">24</span>
+              <span class="stat-label">Workouts This Month</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-value">8,450</span>
+              <span class="stat-label">Calories Burned</span>
+            </div>
+          </div>
+        </div>
+        <div class="tracking-card">
+          <div class="tracking-icon">
+            <i class="fas fa-weight"></i>
+          </div>
+          <h3>Body Measurements</h3>
+          <div class="tracking-stats">
+            <div class="stat-item">
+              <span class="stat-value">-5.2 kg</span>
+              <span class="stat-label">Weight Change</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-value">+2.1 kg</span>
+              <span class="stat-label">Muscle Mass</span>
+            </div>
+          </div>
+        </div>
+        <div class="tracking-card">
+          <div class="tracking-icon">
+            <i class="fas fa-trophy"></i>
+          </div>
+          <h3>Achievements</h3>
+          <div class="achievement-list">
+            <div class="achievement">
+              <i class="fas fa-medal"></i>
+              <span>First Week Complete</span>
+            </div>
+            <div class="achievement">
+              <i class="fas fa-fire"></i>
+              <span>1000 Calories Burned</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section id="pricing" class="pricing">
+    <div class="container">
+      <h2>Choose Your Plan</h2>
+      <p class="section-subtitle">Flexible pricing options to fit your fitness goals and budget</p>
+      <div class="pricing-grid">
+        <div class="pricing-card">
+          <h3>Basic</h3>
+          <div class="price">
+            <span class="currency">₹</span>
+            <span class="amount">1199</span>
+            <span class="period">/month</span>
+          </div>
+          <ul class="pricing-features">
+            <li><i class="fas fa-check"></i> Access to all workouts</li>
+            <li><i class="fas fa-check"></i> Basic nutrition plans</li>
+            <li><i class="fas fa-check"></i> Progress tracking</li>
+            <li><i class="fas fa-check"></i> Mobile app access</li>
+          </ul>
+          <a href="index.html" class="btn btn-outline">Get Started</a>
+        </div>
+
+        <div class="pricing-card featured">
+          <div class="popular-badge">Most Popular</div>
+          <h3>Pro</h3>
+          <div class="price">
+            <span class="currency">₹</span>
+            <span class="amount">1299</span>
+            <span class="period">/month</span>
+          </div>
+          <ul class="pricing-features">
+            <li><i class="fas fa-check"></i> Everything in Basic</li>
+            <li><i class="fas fa-check"></i> Personalized meal plans</li>
+            <li><i class="fas fa-check"></i> 1-on-1 trainer sessions</li>
+            <li><i class="fas fa-check"></i> Advanced analytics</li>
+            <li><i class="fas fa-check"></i> Priority support</li>
+          </ul>
+          <a href="index.html" class="btn btn-primary">Get Started</a>
+        </div>
+
+        <div class="pricing-card">
+          <h3>Elite</h3>
+          <div class="price">
+            <span class="currency">₹</span>
+            <span class="amount">1499</span>
+            <span class="period">/month</span>
+          </div>
+          <ul class="pricing-features">
+            <li><i class="fas fa-check"></i> Everything in Pro</li>
+            <li><i class="fas fa-check"></i> Unlimited trainer sessions</li>
+            <li><i class="fas fa-check"></i> Custom workout plans</li>
+            <li><i class="fas fa-check"></i> Nutrition coaching</li>
+            <li><i class="fas fa-check"></i> 24/7 support</li>
+          </ul>
+          <a href="index.html" class="btn btn-outline">Get Started</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-content">
+        <h2>Ready to Transform Your Life?</h2>
+        <p>Start your fitness journey today with a free trial. No commitment, no credit card required.</p>
+        <div class="cta-features">
+          <div class="cta-feature">
+            <i class="fas fa-check"></i>
+            <span>7-day free trial</span>
+          </div>
+          <div class="cta-feature">
+            <i class="fas fa-check"></i>
+            <span>Cancel anytime</span>
+          </div>
+          <div class="cta-feature">
+            <i class="fas fa-check"></i>
+            <span>Access to all features</span>
+          </div>
+        </div>
+        <a href="index.html" class="btn btn-primary btn-lg">Start Free Trial</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <div class="footer-logo">
+            <i class="fas fa-dumbbell"></i>
+            <span>ProFit Connect</span>
+          </div>
+          <p>Transform your body and mind with our comprehensive fitness platform. Join thousands of people achieving their goals.</p>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+        <div class="footer-section">
+          <h4>Workouts</h4>
+          <ul>
+            <li><a href="#workouts">Strength Training</a></li>
+            <li><a href="#workouts">Cardio Workouts</a></li>
+            <li><a href="#workouts">Yoga & Flexibility</a></li>
+            <li><a href="#workouts">HIIT Training</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Contact</h4>
+          <div class="contact-info">
+            <p><i class="fas fa-envelope"></i> support@ProFit.com</p>
+            <p><i class="fas fa-phone"></i> 8708656580</p>
+            <p><i class="fas fa-map-marker-alt"></i> Available In India</p>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 ProFit Connect. All rights reserved. | Transform your life, one workout at a time.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/landing.js"></script>
+</body>
+</html>
